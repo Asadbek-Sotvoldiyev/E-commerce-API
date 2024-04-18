@@ -4,12 +4,15 @@ from rest_framework.response import Response
 from .serializers import CategorySerializer, ProductSerializer
 from .models import Category, Product
 from django.shortcuts import get_object_or_404
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from users.permissions import IsAdminOrReadOnly
 
 
 # Category CreateView
 class CategoryCreateApiView(CreateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+
 
 # Category read, update, delete
 class CategoryApiView(APIView):
@@ -61,6 +64,7 @@ class ProductListCreateApiView(ListCreateAPIView):
 
 # Product Update, delete, detail
 class ProductRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAdminOrReadOnly, ]
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 

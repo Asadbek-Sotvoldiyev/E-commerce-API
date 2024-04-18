@@ -29,10 +29,19 @@ INSTALLED_APPS = [
 
     #local app
     'api',
+    'users',
 
     #packages
     'rest_framework',
+    'rest_framework_simplejwt',
+    'drf_yasg',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
